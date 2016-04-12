@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>White Board</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .cursor {
+      width: 25px;
+      height: 23px;
+      position: absolute;
+      margin: -2px;
+      margin-left: -5px;
+       z-index: 100;
+    }
+    .tooltiptext{
+      width: auto;
+    
+    background-color: black;
+    opacity:0.1;
+    color: #fff;
+    text-align: center;
+    padding: 5px 5px;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    top:19px;
+    left:17px;
+    z-index: 100;
+    }
+    .tooltiptext:hover {
+      opacity:0.9;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <div  class="cursor">
+  <img src="public/img/Cursor.png" width="25px" height="23px">
+  <span class="tooltiptext">Chaitanya</span>
+  </div>
+  
+  
+  player1
+  <div id='div1'></div>
+  player2
+  <div id='div2'></div>
+
+  <script src="public/js/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script>
+    var socket = io();
+   socket.emit('adduser', prompt("What's your name?"));
+    
+    $(document).ready(function() {
+        
+      $(document).mousemove(function(event) {
+        
+        socket.emit('mouseMove', event.pageX, event.pageY);
+        $("#div1").text(event.pageX + ", " + event.pageY);
+
+      });
+
+
+
+      socket.on('mouseMove', function(eventx, eventy) {
+        $("#div2").text(eventx + ", " + eventy);
+        
+        $('.cursor').animate({
+          'left': eventx + 'px',
+          'top': eventy + 'px'
+        }, 0);
+        
+      });
+
+
+    });
+  </script>
+</body>
+
+</html>
