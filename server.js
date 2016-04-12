@@ -1,6 +1,8 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var fs = require('fs');
+
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/index.html');
@@ -21,14 +23,15 @@ app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that! 404');
 });
 
-var fs = require('fs');
-var SocketsList=JSON.parse(fs.readFileSync('db.txt', 'utf8'));;
+
+var SocketsList= [];  //JSON.parse(fs.readFileSync('db.txt', 'utf8'));;
 
 
 console.log(SocketsList);
 io.on('connection', function(socket){
   console.log('a user connected');
   
+    
     socket.on('adduser', function(username) {
    // we store the username in the socket session for this client
    if (username === '' || username === null) {
@@ -36,14 +39,9 @@ io.on('connection', function(socket){
 
    }
    socket.username = username;
-   
-   //console.log(io.sockets.clients());
-//   function logArrayElements(element, index, array) {
-//   console.log('Socketslist[' + index + '] = ' + element.username);
-// }
-//   SocketsList.forEach(logArrayElements);
   
-   console.log(SocketsList.length)
+  
+   console.log(SocketsList.length);
   var newPersonSoc= function(username,SockId,mouseX,mouseY){
       this.username=username;
       this.SockId=SockId;
@@ -54,7 +52,7 @@ io.on('connection', function(socket){
       
   };
   var newPersonOb=new newPersonSoc(socket.username,socket.id);
-  console.log(newPersonOb)
+  console.log(newPersonOb);
   updatedb(newPersonOb,"write");
   
   
@@ -64,6 +62,7 @@ io.on('connection', function(socket){
   
    socket.on('mouseMove', function(eventx,eventy){
     //console.log(eventx + " "+ eventy);
+    
     socket.broadcast.emit('mouseMove', eventx,eventy);
      //io.emit('mouseMove');
   });
@@ -72,7 +71,8 @@ io.on('connection', function(socket){
   socket.on('disconnect', function() {
       console.log('Got disconnect!');
 
-      var i = SocketsList.indexOf(socket);
+      var i = Socketsearch(socket.id,SocketsList);
+      console.log(i)
       updatedb(i,"del");
    });
   
@@ -89,15 +89,19 @@ http.listen(process.env.PORT || 3000, function(){
 
 
 
-function updatedb(Person,writeOrDel) {
+function updatedb(Person,writeUpDel) {
 
-    if(writeOrDel==="write"){
+    if(writeUpDel==="write"){
     SocketsList.push(Person);
     }
-    else if(writeOrDel=="del"){
+    else if(writeUpDel=="del"){
         SocketsList.splice(Person, 1);
     }
-    var updateusers = JSON.stringify(SocketsList);
+    else if(writeUpDel=="up"){
+        // 
+        //
+    }
+ var updateusers = JSON.stringify(SocketsList);
 
 
     fs.writeFile('db.txt', updateusers, function(err) {
@@ -105,4 +109,15 @@ function updatedb(Person,writeOrDel) {
 
     });
 
+}
+
+function Socketsearch(socketID, SocketsList){
+    for (var i=0; i < SocketsList.length; i++) {
+        if (SocketsList[i].name === socketID) {
+            console.log(SocketsList[i])
+            return i;
+
+        }
+      
+    }
 }
