@@ -6,7 +6,7 @@
   <style>
     div {
       width: 100px;
-      height: 100px;
+      height: 200px;
     }
     
     .cursor {
@@ -15,26 +15,26 @@
       position: absolute;
       margin: -2px;
       margin-left: -5px;
-       z-index: 100;
+      z-index: 100;
     }
-    .tooltiptext{
-      width: auto;
     
-    background-color: black;
-    opacity:0.1;
-    color: #fff;
-    text-align: center;
-    padding: 5px 5px;
-    border-radius: 6px;
- 
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    top:19px;
-    left:17px;
-    z-index: 100;
+    .tooltiptext {
+      width: auto;
+      background-color: black;
+      opacity: 0.1;
+      color: #fff;
+      text-align: center;
+      padding: 5px 5px;
+      border-radius: 6px;
+      /* Position the tooltip text - see examples below! */
+      position: absolute;
+      top: 19px;
+      left: 17px;
+      z-index: 100;
     }
+    
     .tooltiptext:hover {
-      opacity:0.9;
+      opacity: 0.9;
     }
   </style>
 
@@ -43,28 +43,42 @@
 
 <body>
 
-  <div  class="cursor">
-  <img src="public/img/Cursor.png" width="25px" height="23px">
-  <span class="tooltiptext">Chaitanya</span>
-  </div>
-  
-  
-  player1
+
+
+
+  <div id='div0'></div>
   <div id='div1'></div>
-  player2
-  <div id='div2'></div>
+
 
   <script src="public/js/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 
   <script>
     var socket = io();
-   socket.emit('adduser', prompt("What's your name?"));
-    
+    socket.emit('adduser', prompt("What's your name?"));
+    var oldUsers = [];
     $(document).ready(function() {
-        
+      socket.on('Myusername', function(username, Idnumber) {
+        $("#div0").text('You are now Connnected!! \n MyUsername : ' + username + " and ID :" + Idnumber);
+        oldUsers.push(Idnumber);
+        console.log('MyUsername : ' + username + " and ID :" + Idnumber);
+      });
+      socket.on('getUsers', function(SocketsList) {
+        console.log(SocketsList);
+        var allUserIds = getDetails(SocketsList, "idNumber");
+        console.log(allUserIds);
+        for (var i in SocketsList) {
+          if (oldUsers.indexOf(SocketsList[i].idNumber) == -1) {
+            oldUsers.push(SocketsList[i].idNumber);
+            console.log(oldUsers);
+            $('body').append('<div id="' + SocketsList[i].idNumber + '" class="cursor" style="top:' + SocketsList[i].mouseX + 'px;left:' + SocketsList[i].mouseY + 'px;"><img src="public/img/Cursor.png" width="25px" height="23px"><span class="tooltiptext">' + SocketsList[i].username + '</span></div>');
+          }
+        }
+      });
+
+
       $(document).mousemove(function(event) {
-        
+
         socket.emit('mouseMove', event.pageX, event.pageY);
         $("#div1").text(event.pageX + ", " + event.pageY);
 
@@ -72,16 +86,23 @@
 
 
 
-      socket.on('mouseMove', function(eventx, eventy) {
-        $("#div2").text(eventx + ", " + eventy);
-        
-        $('.cursor').animate({
+      socket.on('mouseMove', function(idNumber,eventx,eventy) {
+
+
+        $('#'+idNumber).animate({
           'left': eventx + 'px',
           'top': eventy + 'px'
         }, 0);
-        
+
       });
 
+      function getDetails(SocketsList, key) {
+        var ListOfUsers = [];
+        for (var i = 0; i < SocketsList.length; ++i)
+
+          ListOfUsers.push(SocketsList[i][key]);
+        return ListOfUsers;
+      }
 
     });
   </script>

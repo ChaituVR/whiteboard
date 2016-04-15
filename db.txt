@@ -1,1 +1,1 @@
-[{"username":"3","SockId":"/#iS3NyAeQJ-Wyh2KOAAAK","mouseX":0,"mouseY":0},{"username":"113","SockId":"/#Gk7j8_oaXn5Lbv0pAAAL","mouseX":0,"mouseY":0},{"username":"Guest106","SockId":"/#Kn1T73B0fh3Hmgg6AAAM","mouseX":0,"mouseY":0}]
+[]
