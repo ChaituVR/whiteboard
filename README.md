@@ -5,7 +5,7 @@ Trying to  create a white board ... where people can collabrate .. and more
 
 1.) Download the repo
 
-2.) cd path-to-directory\chatapp-socket.io
+2.) cd path-to-directory\whiteboard
 
 3.) npm install
 
