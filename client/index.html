@@ -102,7 +102,6 @@
       });
 
 
-
       socket.on('mouseMove', function(idNumber,eventx,eventy) {
 
 
@@ -112,6 +111,18 @@
         }, 0);
 
       });
+
+      socket.on('drawing', function(idNumber,lastX ,lastY,eventx,eventy) {
+        DrawLine (ctx ,lastX ,lastY , eventx,eventy );
+// console.log(eventx,eventy);
+        // $('#'+idNumber).animate({
+        //   'left': eventx + 'px',
+        //   'top': eventy + 'px'
+        // }, 0);
+
+      });
+
+
 
       function getDetails(SocketsList, key) {
         var ListOfUsers = [];

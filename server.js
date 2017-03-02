@@ -45,7 +45,10 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('mouseMove', socket.idNumber, eventx, eventy); //io.emit('mouseMove');
     });
 
-    // function saveMousePostions(id) {}
+    socket.on('drawing', function(lastX ,lastY ,eventx, eventy) {
+        socket.broadcast.emit('drawing', socket.idNumber,lastX ,lastY , eventx, eventy); //io.emit('mouseMove');
+    });
+
     socket.on('disconnect', function() {
         console.log('Got disconnect!');
 

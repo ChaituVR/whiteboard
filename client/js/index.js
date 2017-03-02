@@ -52,11 +52,13 @@ brushColorcontrols.addEventListener('change', colorChange);
 canvas.addEventListener("mousemove", draw);
 canvas.addEventListener("mousedown", (e) => {
   drawing = true;
+
   [lastX, lastY] = [e.offsetX, e.offsetY];
   if (all_settings.classList.value == "active") {
     all_settings.classList.remove('active');
     all_settings.classList.add('hidden');
   }
+  draw(e);
 });
 canvas.addEventListener("mouseup", () => {
   drawing = false
@@ -93,7 +95,7 @@ function colorTypeChange() {
 }
 
 function downloadImage(){
-    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because 
+    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because
   window.location.href=image;
 }
 
@@ -113,14 +115,21 @@ function draw(e) {
   cursor.style.left = (e.clientX - (cursor.offsetWidth / 2)) + "px";
   cursor.style.top = (e.clientY - (cursor.offsetHeight / 2)) + "px";
   if (drawing === false) return;
-  ctx.lineWidth = brush.lineWidth
+  // ctx.lineWidth = brush.lineWidth
   ctx.globalCompositeOperation = Operationtype;
   cursor.style.background = colortype == "hue" ? `hsl(${hue % 360},100%,50%)` : brush.strokeStyle;
   ctx.strokeStyle = colortype == "hue" ? `hsl(${hue % 360},100%,50%)` : brush.strokeStyle;
-  ctx.beginPath();
-  ctx.moveTo(lastX, lastY);
-  ctx.lineTo(e.offsetX, e.offsetY);
-  ctx.stroke();
+  DrawLine (ctx ,lastX ,lastY , e.offsetX , e.offsetY );
+  socket.emit("drawing",lastX ,lastY , e.offsetX, e.offsetY);
   [lastX, lastY] = [e.offsetX, e.offsetY];
   hue++;
+}
+
+function DrawLine (ctx ,lastX ,lastY , newPostionX , newPostionY ){
+  ctx.lineWidth = brush.lineWidth
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(newPostionX, newPostionY);
+  ctx.stroke();
+  return ctx;
 }
