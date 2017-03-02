@@ -1,4 +1,12 @@
-Trying to  create a white board ... where people can collabrate .. and more
+
+
+:construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction:
+###:pick: Under Construction Come Back later :wave: or :construction_worker: Contribute to make some progress :hammer: !
+
+:construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction::construction:
+
+
+A white board where people can collabrate draw and download as image
 
 
 #How to install:
@@ -9,4 +17,4 @@ Trying to  create a white board ... where people can collabrate .. and more
 
 3.) npm install
 
-This will install all dependencies in package.json
+4.) npm run dev (if you are contributing)
