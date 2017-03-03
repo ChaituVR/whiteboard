@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "openBrowser": "x-www-browser http://127.0.1.1:3000",
-    "dev": "NODE_ENV=dev nodemon server.js"
+    "dev": "nodemon server.js && touch db.txt"
   },
   "author": "ChaituVr",
   "license": "MIT",
@@ -16,6 +16,10 @@
     "socket.io": "^1.4.5"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-notify": "^3.0.0",
     "nodemon": "^1.11.0",
     "opn": "^4.0.2"
   }

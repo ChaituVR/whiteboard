@@ -59,10 +59,8 @@ io.on('connection', function(socket) {
 });
 
 var listener = http.listen(process.env.APP_PORT || 3000, (req, res) => {
-    require('dns').lookup(require('os').hostname(), function(err, add, fam) {
-        console.log(process.env.NODE_ENV);
-        require('opn')('http://' + add + ':' + listener.address().port);
-        console.log('We are live on http://' + add + ':' + listener.address().port);
+    require('dns').lookup(require('os').hostname(), function(err, address, fam) {
+        console.log('We are live on http://' + address + ':' + listener.address().port);
     })
 });
 
