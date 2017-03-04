@@ -1,3 +1,4 @@
+`use strict`;
 const allOperationTypes = ["source-over", "lighter", "xor", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
 const operation = document.getElementById('operation-types');
 allOperationTypes.forEach((a) => {
@@ -18,7 +19,7 @@ ctx.lineCap = "round";
 var brush = {
     strokeStyle: "#BADA55",
     lineWidth: 20
-  }
+  };
 
 var drawing = false;
 var lastX = 0;
@@ -33,12 +34,12 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "#fff";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const brushcontrols = document.querySelector('#brush-sizeinput')
+const brushcontrols = document.querySelector('#brush-sizeinput');
 const brushColorcontrols = document.querySelector('#brush-color');
 const hueColorcontrols = document.querySelector('#brush-hsl');
 const backgControls = document.querySelector('#background-color');
 const cursor = document.getElementById("cursor");
-const all_settings = document.querySelector("#all-settings")
+const all_settings = document.querySelector("#all-settings");
 const downloadBtn = document.querySelector("#download");
 
 
@@ -61,7 +62,7 @@ canvas.addEventListener("mousedown", (e) => {
   draw(e);
 });
 canvas.addEventListener("mouseup", () => {
-  drawing = false
+  drawing = false;
 });
 canvas.addEventListener("mouseout", () => {
   drawing = false;
@@ -81,7 +82,7 @@ function bgcolorChange() {
 }
 
 function lineWidthChange() {
-  brush.lineWidth = parseInt(this.value);
+  brush.lineWidth = parseInt(this.value,10);
   [cursor.style.width, cursor.style.height] = [(brush.lineWidth) + "px", (brush.lineWidth) + "px"];
 }
 
@@ -126,7 +127,7 @@ function draw(e) {
 }
 
 function DrawLine (ctx ,lastX ,lastY , newPostionX , newPostionY ){
-  ctx.lineWidth = brush.lineWidth
+  ctx.lineWidth = brush.lineWidth;
   ctx.beginPath();
   ctx.moveTo(lastX, lastY);
   ctx.lineTo(newPostionX, newPostionY);

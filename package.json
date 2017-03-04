@@ -5,8 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "openBrowser": "x-www-browser http://127.0.1.1:3000",
-    "dev": "nodemon server.js && touch db.txt"
+    "dev": "gulp && touch db.txt"
   },
   "author": "ChaituVr",
   "license": "MIT",

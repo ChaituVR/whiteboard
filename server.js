@@ -1,10 +1,11 @@
+`use strict`;
 var express = require('express');
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var fs = require('fs');
 
-require('./app/routes')(app)
+require('./app/routes')(app);
 
 var SocketsList = [];
 
@@ -45,8 +46,8 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('mouseMove', socket.idNumber, eventx, eventy); //io.emit('mouseMove');
     });
 
-    socket.on('drawing', function(lastX ,lastY ,eventx, eventy) {
-        socket.broadcast.emit('drawing', socket.idNumber,lastX ,lastY , eventx, eventy); //io.emit('mouseMove');
+    socket.on('drawing', function(lastX, lastY, eventx, eventy) {
+        socket.broadcast.emit('drawing', socket.idNumber, lastX, lastY, eventx, eventy); //io.emit('mouseMove');
     });
 
     socket.on('disconnect', function() {
@@ -58,19 +59,22 @@ io.on('connection', function(socket) {
 
 });
 
-var listener = http.listen(process.env.APP_PORT || 3000, (req, res) => {
+var listener = http.listen(process.env.APP_PORT || 8080, (req, res) => {
     require('dns').lookup(require('os').hostname(), function(err, address, fam) {
+        if (err) console.log(err);
         console.log('We are live on http://' + address + ':' + listener.address().port);
-    })
+    });
 });
 
 function updatedb(Person, writeUpDel) {
 
     if (writeUpDel === "write") {
         SocketsList.push(Person);
-    } else if (writeUpDel == "del") {
+    }
+    else if (writeUpDel == "del") {
         SocketsList.splice(Person, 1);
-    } else if (writeUpDel == "up") {
+    }
+    else if (writeUpDel == "up") {
         //
         //
     }
@@ -80,8 +84,7 @@ function updatedb(Person, writeUpDel) {
         if (err)
             return console.log(err);
 
-        }
-    );
+    });
 
 }
 
@@ -95,13 +98,13 @@ function Socketsearch(socketID, SocketsList) {
     }
 }
 
-function getDetails(SocketsList, key) {
-    var ListOfUsers = [];
-    for (var i = 0; i < SocketsList.length; ++i)
+// function getDetails(SocketsList, key) {
+//     var ListOfUsers = [];
+//     for (var i = 0; i < SocketsList.length; ++i)
 
-        ListOfUsers.push(SocketsList[i][key]);
-    return ListOfUsers;
-}
+//         ListOfUsers.push(SocketsList[i][key]);
+//     return ListOfUsers;
+// }
 
 function makeid() {
     var text = "";
