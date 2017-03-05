@@ -1,12 +1,16 @@
+`use strict`;
 var fs = require('fs');
 
 module.exports = function (socket,SocketsList,io){
   console.log('a user connected');
 
-  socket.on('adduser', function(username) {
+  socket.on('adduser', function(username,room) {
       // we store the username in the socket session for this client
       if (username === '' || username === null) {
           username = 'Guest' + Math.floor((Math.random() * 1000) + 1);
+      }
+      if (room === '' || room === null) {
+          room = 'room' + Math.floor((Math.random() * 1000) + 1);
       }
       socket.username = username;
       socket.idNumber = "user" + makeid();
@@ -27,16 +31,25 @@ module.exports = function (socket,SocketsList,io){
       };
       var newPersonOb = new newPersonSoc(socket.username, socket.idNumber);
       updatedb(newPersonOb, "write");
-      io.emit('getUsers', SocketsList);
+socket.join(room);
+// console.log(io.sockets.clients(room));
+      io.in(room).emit('getUsers', SocketsList);
 
+
+        // console.log(io.sockets.adapter.rooms);
+        // console.log(socket.client)
   });
 
   socket.on('mouseMove', function(eventx, eventy) {
-      socket.broadcast.emit('mouseMove', socket.idNumber, eventx, eventy); //io.emit('mouseMove');
+    // console.log();
+      var room = Object.keys(socket.rooms)[1]
+      socket.broadcast.in(room).emit('mouseMove', socket.idNumber, eventx, eventy); //io.emit('mouseMove');
   });
 
+
   socket.on('drawing', function(lastX, lastY, eventx, eventy) {
-      socket.broadcast.emit('drawing', socket.idNumber, lastX, lastY, eventx, eventy); //io.emit('mouseMove');
+    var room = Object.keys(socket.rooms)[1]
+      socket.broadcast.in(room).emit('drawing', socket.idNumber, lastX, lastY, eventx, eventy); //io.emit('mouseMove');
   });
 
   socket.on('disconnect', function() {
