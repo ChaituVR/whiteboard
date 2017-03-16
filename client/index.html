@@ -2,25 +2,29 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1">
     <title>WhiteBoard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='shortcut icon' type='image/x-icon' href='public/favicon-paw.ico' />
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 
+
     <style>
+        @-ms-viewport {
+            width: device-width;
+        }
+
         html,
         body {
             background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) no-repeat fixed 100% 100%;
             /*   background-repeat:repeat-y; */
             text-align: center;
-            color:white;
+            color: white;
             overflow: hidden;
             font-family: 'Josefin Sans', sans-serif;
-
         }
 
         .buttons {
-
             /*margin: 20vh 0;*/
         }
 
@@ -52,11 +56,11 @@
         }
 
         #site-icon {
-          text-align: center;
-          /*margin-top:100px;*/
-          font-size: 2em;
-          margin:15vh 0;
-          color:#3e2723;
+            text-align: center;
+            /*margin-top:100px;*/
+            font-size: 2em;
+            margin: 15vh 0;
+            color: #3e2723;
         }
     </style>
 </head>
@@ -72,6 +76,10 @@
         <button>Create</button>
         <button>Join</button>
     </div>
+    <div id="React">
+
+    </div>
+    <script src="public/bundle.js"></script>
 </body>
 
 </html>
