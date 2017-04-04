@@ -21,3 +21,9 @@ var listener = http.listen(process.env.APP_PORT || 8080, (req, res) => {
         console.log('We are live on http://' + address + ':' + listener.address().port);
     });
 });
+
+process.on( 'SIGINT', function() {
+  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+  // some other closing procedures go here
+  process.exit(1);
+});

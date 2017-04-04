@@ -69,12 +69,12 @@
  <canvas id="draw"></canvas>
 
   <script src="public/js/jquery.min.js"></script>
-  <script src="public/js/index.js"></script>
+  <script src="public/js/draw.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 
   <script>
     var socket = io();
-    socket.emit('adduser', '' , prompt("What's your room name?")); 
+    socket.emit('adduser', '' , prompt("What's your room name?"));
     var oldUsers = [];
     $(document).ready(function() {
       // socket.on('connect',function(){
