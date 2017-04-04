@@ -1,8 +1,9 @@
 `use strict`;
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var notify = require('gulp-notify');
-var livereload = require('gulp-livereload');
+const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+const notify = require('gulp-notify');
+const livereload = require('gulp-livereload');
+const webpack = require('webpack');
 
 // Task
 
@@ -17,7 +18,7 @@ gulp.task('default', function() {
         ext: 'js css html' // for all Js css and html file changes
     }).on('restart', function() {
         // when the app has restarted, run livereload.
-        gulp.src(['server.js']).pipe(livereload()).pipe(notify({
+        gulp.src(['server.js']).pipe(webpack( require('./webpack.config.js'))).pipe(livereload()).pipe(notify({
             message: 'Reloading Please wait!!',
             onLast: true,
             wait: true
