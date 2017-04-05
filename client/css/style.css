@@ -47,7 +47,7 @@ html,body{
   border-radius:5px;
 }
 #all-settings{
-  
+
   width:250px;
   margin:10px;
 }
@@ -59,8 +59,8 @@ label{
 input{
 vertical-align: middle;
 }
-.btn{ 
-  display:block; 
+.btn{
+  display:block;
   cursor:pointer;
   float:right;
 /*   margin-left:130px; */
@@ -79,29 +79,29 @@ vertical-align: middle;
 }
 
 
-.icon{ 
+.icon{
   float:left;
-  width:14px; 
-  height:14px; 
-  position:relative; 
+  width:14px;
+  height:14px;
+  position:relative;
 }
-.icon:before, 
-.icon:after{ 
-  position:absolute; 
-  content:""; 
-  display:block; 
+.icon:before,
+.icon:after{
+  position:absolute;
+  content:"";
+  display:block;
 }
 .icon-gear:before{
   width:16px;
   height:16px;
-  box-shadow:0 0 0 4px inset; 
-  border-radius:16px; 
-  border:1px dashed; 
+  box-shadow:0 0 0 4px inset;
+  border-radius:16px;
+  border:1px dashed;
   top:-1px;
   left:-1px;
 }
 .draw-inputs{
-  height: 40px; 
+  height: 40px;
   text-align: left;
   padding-left: 10px;
 }
@@ -134,7 +134,7 @@ vertical-align: middle;
 @-webkit-keyframes fadeIn {
     from { opacity: 0; }
       to { opacity: 1; }
-}  
+}
 @keyframes fadeIn {
     from { opacity: 0; }
       to { opacity: 1; }
@@ -142,8 +142,34 @@ vertical-align: middle;
 @-webkit-keyframes fadeOut {
     from { opacity: 1; }
       to { opacity: 1; }
-}  
+}
 @keyframes fadeOut {
     from { opacity: 0; }
       to { opacity: 1; }
+}
+.client-cursor {
+  width: 25px;
+  height: 23px;
+  position: absolute;
+  margin: -2px;
+  margin-left: -5px;
+  z-index: 100;
+}
+
+.tooltiptext {
+  width: auto;
+  background-color: black;
+  opacity: 0.1;
+  color: #fff;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+  position: absolute;
+  top: 19px;
+  left: 17px;
+  z-index: 100;
+}
+
+.tooltiptext:hover {
+  opacity: 0.9;
 }
