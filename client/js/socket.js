@@ -1,6 +1,6 @@
 "use strict"
 const socket = io();
-socket.emit('adduser', '' , prompt("What's your room name?"));
+socket.emit('adduser', '' , "abc");
 var oldUsers = [];
 $(document).ready(function() {
   socket.on('Myusername', function(username, Idnumber) {

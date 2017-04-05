@@ -11,7 +11,7 @@ const canvas = document.getElementById('draw');
 const ctx = canvas.getContext('2d');
 
 canvas.width = window.innerWidth - 55;
-canvas.height = window.innerHeight - 105;
+canvas.height = window.innerHeight - 155;
 
 ctx.lineJoin = "round";
 ctx.lineCap = "round";

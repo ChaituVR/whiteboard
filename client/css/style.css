@@ -10,7 +10,17 @@ html,body{
   -webkit-user-select: none;
   -o-user-select: none;
  }
-
+footer{
+  position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #343436;
+    text-align: center;
+    color:black;
+    height:20px;
+}
 #cursor{
   pointer-events: none;
 /* display: block !important; */
@@ -172,4 +182,13 @@ vertical-align: middle;
 
 .tooltiptext:hover {
   opacity: 0.9;
+}
+
+.invite-btn{
+  position: absolute;
+  right:10px;
+  padding:7px;
+  color:white;
+  background-color: black;
+  border:none;
 }
