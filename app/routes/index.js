@@ -7,11 +7,12 @@ const clientPath = '/../../client/';
 module.exports = function(app) {
 
     app.use(helmet());
-    app.use('/public', express.static('client'));
+    app.use('*/public?', express.static('client'));
     app.get('/', function(req, res) {
         res.sendFile(path.join(__dirname + clientPath + 'index.html'));
     });
-    app.get('/draw', function(req, res) {
+    app.get('/draw/:new?', function(req, res) {
+        console.log(req.params.new);
         res.sendFile(path.join(__dirname + clientPath + 'draw.html'));
     });
     app.use(function(req, res, next) {

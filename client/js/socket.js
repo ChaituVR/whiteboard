@@ -1,15 +1,29 @@
-"use strict"
+"use strict";
+
+/*global io, $ */
+
+
 const socket = io();
-socket.emit('adduser', '' , "abc");
+
+var locationArray = window.location.pathname.split("/");
+var ExistingRoomID = locationArray [locationArray.length - 1];
+
+
 var oldUsers = [];
+
 $(document).ready(function() {
+  
+  socket.emit('adduser', '' , ExistingRoomID);
   socket.on('Myusername', function(username, Idnumber) {
     oldUsers.push(Idnumber);
     console.log('MyUsername : ' + username + " and ID :" + Idnumber);
   });
+  socket.on('RoomId',(roomID)=>{ 
+    console.log('roomId : '+roomID);
+  });
   socket.on('getUsers', function(SocketsList) {
     // console.log(SocketsList);
-    var allUserIds = getDetails(SocketsList, "idNumber");
+    // var allUserIds = getDetails(SocketsList, "idNumber");
     // console.log(allUserIds);
     for (var i in SocketsList) {
       if (oldUsers.indexOf(SocketsList[i].idNumber) == -1) {
@@ -22,9 +36,7 @@ $(document).ready(function() {
 
 
   $(document).mousemove(function(event) {
-
     socket.emit('mouseMove', event.pageX, event.pageY);
-
   });
 
 
@@ -37,7 +49,8 @@ $(document).ready(function() {
     }, 0);
 
   });
-
+  /*global DrawLine*/
+  /*global ctx*/
   socket.on('drawing', function(idNumber,lastX ,lastY,eventx,eventy) {
     DrawLine (ctx ,lastX ,lastY , eventx,eventy );
 // console.log(eventx,eventy);
@@ -48,12 +61,12 @@ $(document).ready(function() {
 
   });
 
-  function getDetails(SocketsList, key) {
-    var ListOfUsers = [];
-    for (var i = 0; i < SocketsList.length; ++i)
+  // function getDetails(SocketsList, key) {
+  //   var ListOfUsers = [];
+  //   for (var i = 0; i < SocketsList.length; ++i)
 
-      ListOfUsers.push(SocketsList[i][key]);
-    return ListOfUsers;
-  }
+  //     ListOfUsers.push(SocketsList[i][key]);
+  //   return ListOfUsers;
+  // }
 
 });

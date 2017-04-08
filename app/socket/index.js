@@ -10,12 +10,13 @@ module.exports = function (socket,SocketsList,io){
           username = 'Guest' + Math.floor((Math.random() * 1000) + 1);
       }
       if (room === '' || room === null) {
-          room = 'room' + Math.floor((Math.random() * 1000) + 1);
+          room = 'room' + Math.floor((Math.random() * 10000) + 1);
       }
+      console.log(room);
       socket.username = username;
       socket.idNumber = "user" + makeid();
       socket.emit('Myusername', socket.username, socket.idNumber);
-
+      socket.emit('RoomId',room);
       var newPersonSoc = function(username, idNumber, mouseX, mouseY) {
           this.username = username;
           this.idNumber = idNumber;
@@ -31,8 +32,8 @@ module.exports = function (socket,SocketsList,io){
       };
       var newPersonOb = new newPersonSoc(socket.username, socket.idNumber);
       updatedb(newPersonOb, "write");
-socket.join(room);
-// console.log(io.sockets.clients(room));
+      socket.join(room);
+      console.log(room);
       io.in(room).emit('getUsers', SocketsList);
 
 
