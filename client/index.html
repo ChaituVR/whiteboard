@@ -13,7 +13,7 @@
         @-ms-viewport {
             width: device-width;
         }
-
+        
         html,
         body {
             background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%) no-repeat fixed 100% 100%;
@@ -23,11 +23,25 @@
             overflow: hidden;
             font-family: 'Josefin Sans', sans-serif;
         }
-
-        .buttons {
-            /*margin: 20vh 0;*/
+        
+        #join-room-buttons{
+            display:none;
+            
         }
-
+        .buttons-active {
+            display:inline !important;
+        }
+        #create-join-buttons{
+            display:none;
+        }
+        #roomidField{
+            height:50px;
+            font-size:1.3em;
+            margin-top:10px;
+            margin-bottom:10px;
+            padding-left: 5px;
+        }
+        
         button {
             background: rgba(0, 0, 0, 0);
             border: 2px white solid;
@@ -44,7 +58,7 @@
             outline-offset: 0px;
             transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
         }
-
+        
         button:hover {
             box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
             outline-color: rgba(255, 255, 255, 0);
@@ -54,10 +68,9 @@
             -o-transition: all .5s linear;
             transition: all .5s linear;
         }
-
+        
         #site-icon {
             text-align: center;
-            /*margin-top:100px;*/
             font-size: 2em;
             margin: 15vh 0;
             color: #3e2723;
@@ -72,16 +85,18 @@
     <div style="font-size:1.3em;">
         <h1>Draw with your Friends</h1>
     </div>
-    <div>
-    <label>Enter Room id:<br/>
-    <input type="text" id="roomidField" name="roomidField" style="height:50px;font-size:1.3em;" placeholder="room2002"/>
+    <div id="join-room-buttons">
+        <label>Enter Room id:<br/>
+    <div class="join-buttons">
+    <input type="text" id="roomidField" name="roomidField" placeholder=""/>
     </label>
-    <div><button id="join-room">Let's Go </button></div>
+        <div><button id="join-room">Let's Go </button></div>
     </div>
-    <!--<div class="buttons">-->
-    <!--    <button id = "createButton">Create</button>-->
-    <!--    <button id = "joinButton">Join</button>-->
-    <!--</div>-->
+    </div>
+    <div id="create-join-buttons">
+        <button id="createButton">Create</button>
+        <button id="joinButton">Join</button>
+    </div>
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/index.js"></script>
 </body>

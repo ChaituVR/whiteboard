@@ -43,13 +43,13 @@ module.exports = function (socket,SocketsList,io){
 
   socket.on('mouseMove', function(eventx, eventy) {
     // console.log();
-      var room = Object.keys(socket.rooms)[1]
+      var room = Object.keys(socket.rooms)[1];
       socket.broadcast.in(room).emit('mouseMove', socket.idNumber, eventx, eventy); //io.emit('mouseMove');
   });
 
 
   socket.on('drawing', function(lastX, lastY, eventx, eventy) {
-    var room = Object.keys(socket.rooms)[1]
+    var room = Object.keys(socket.rooms)[1];
       socket.broadcast.in(room).emit('drawing', socket.idNumber, lastX, lastY, eventx, eventy); //io.emit('mouseMove');
   });
 
