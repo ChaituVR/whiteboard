@@ -38,8 +38,14 @@
             </div>
         </div>
     </div>
+      <div id="invite_popup" style="display:none;">
+      <div class="input_block">
+    Share URL <input type="text" name="url"></input></br>
+    Send Invite Code <input type="text" name="code"></input></br>
+  </div>
+     </div>
     <footer>
-        <button class="invite-btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> Invite</button>
+        <button class="invite-btn" id="invite-btn" onclick="btn_function()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Invite</button>
     </footer>
     <canvas id="draw"></canvas>
     <script src="public/js/jquery.min.js"></script>
