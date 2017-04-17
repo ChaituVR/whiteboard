@@ -134,3 +134,12 @@ function DrawLine (ctx ,lastX ,lastY , newPostionX , newPostionY ){
   ctx.stroke();
   return ctx;
 }
+
+function btn_function() {
+    var popup = document.getElementById('invite_popup');
+    if (popup.style.display === 'none') {
+        popup.style.display = 'block';
+    } else {
+        popup.style.display = 'none';
+    }
+}
