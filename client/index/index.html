@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width , initial-scale=1">
     <title>WhiteBoard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel='shortcut icon' type='image/x-icon' href='public/common/favicon-paw.ico' />
+    <link rel="shortcut icon" type="image/x-icon" href="public/common/favicon-paw.ico" />
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 
 
@@ -86,10 +86,10 @@
         <h1>Draw with your Friends</h1>
     </div>
     <div id="join-room-buttons">
-        <label>Enter Room id:<br/>
+        <label>Enter Room id:</label><br/>
     <div class="join-buttons">
     <input type="text" id="roomidField" name="roomidField" placeholder=""/>
-    </label>
+    
         <div><button id="join-room">Let's Go </button></div>
     </div>
     </div>
@@ -99,6 +99,23 @@
     </div>
     <script src="public/common/js/jquery.min.js"></script>
     <script src="public/index/js/index.js"></script>
+   <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('public/common/service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          }).catch(function(err) {
+            console.log(err)
+          });
+        });
+      } else {
+        console.log('service worker is not supported');
+      }
+    </script>
 </body>
 
 </html>
